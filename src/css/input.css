@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+
+body {
+  @apply bg-very-light-gray font-rubik;
+}
+
+.wrapper {
+  max-width: 800px;
+  width: 90%;
+  @apply mx-auto relative;
+}
+
+.loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-section {
+  @apply bg-white p-6 my-8 rounded-lg grid grid-cols-12 
+  items-center gap-y-5 md:gap-0 md:flex md:items-start md:gap-4;
+}
+.comment-input {
+  border: 1.5px solid;
+  @apply border-light-grayish-blue rounded-md p-3
+   focus:border-dark-blue outline-none xs:px-5 col-span-12 resize-none;
+  height: 6rem;
+  max-width: 100%;
+  width: 100%;
+  @apply text-dark-blue;
+}
+.comment-input:focus {
+  box-shadow: 0 0 0 1px hsl(238, 40%, 52%);
+}
+.comment-input::placeholder {
+  @apply text-dark-blue;
+}
+.btn-blue {
+  @apply bg-moderate-blue text-white py-2 px-6
+   rounded-md  hover:opacity-50 active:opacity-50 
+   col-span-6  justify-self-end xs:text-lg;
+}
+.user-img {
+  @apply col-span-6  justify-self-start dp-img;
+}
+.dp-img {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.comment-sect {
+  @apply bg-white my-10 rounded-lg p-6 grid grid-cols-12 items-center
+   md:items-start md:gap-3;
+}
+.score-btns {
+  @apply bg-very-light-gray w-fit flex items-stretch gap-2
+   rounded-xl overflow-hidden col-span-6 mt-4 md:mt-0 md:flex-col;
+}
+.score-btns button {
+  @apply p-3 xs:p-4 hover:bg-light-gray active:bg-light-gray disabled:cursor-not-allowed;
+}
+.score-btns button:hover:disabled {
+  @apply bg-very-light-gray;
+}
+.score-btns p {
+  @apply self-center text-lg xs:px-1;
+}
+.reply-btn {
+  @apply flex items-center col-span-6 justify-self-end mt-4
+   hover:opacity-50 active:opacity-50 focus:opacity-50 md:mt-0;
+}
+.reply-btn p {
+  @apply ml-2;
+}
+
+.reply-sect {
+  @apply bg-white relative my-10 rounded-lg p-6 
+  grid grid-cols-12 items-center md:items-start md:gap-3;
+}
+.edit-del-btns {
+  @apply flex items-center col-span-6 justify-self-end mt-4 md:mt-0;
+}
+.edit-del-btns button {
+  @apply hover:opacity-50 active:opacity-50 xs:text-lg text-sm;
+}
+.replies-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  top: 0;
+  bottom: 0;
+  left: 0.5rem;
+  @apply bg-light-gray rounded-full sm:left-4 md:left-7;
+}
+.show {
+  transition: 0.3s ease-out;
+  transform: translateY(0);
+}
+.hide {
+  transition: 0.3s ease-out;
+  transform: translateY(-50px);
+  pointer-events: none;
+  opacity: 0;
+}
+.delete-modal {
+  max-width: 500px;
+}
+.feedback-modal {
+  max-width: 260px;
+}
+.content:focus {
+  box-shadow: 0 0 0 1px hsl(212, 24%, 26%);
+  outline: none;
+  @apply rounded-md border-dark-blue;
+}
+.editable {
+  border: 1px solid;
+
+  @apply border-light-grayish-blue rounded-md;
+}
