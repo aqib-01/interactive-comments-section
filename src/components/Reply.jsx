@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useState, useRef, useEffect } from "react";
+import { useClickOutside } from "../Hooks";
 import { Context } from "../App";
 import ReplyDeleteModal from "./ReplyDeleteModal";
 const Reply = ({ replyData, commentData }) => {
@@ -27,7 +28,8 @@ const Reply = ({ replyData, commentData }) => {
   // ======================== Refs Start ======================================
   const replyInput = useRef();
   const content = useRef();
-
+  const replyContainer = useRef();
+  const replyBtn = useRef();
   // ======================== Refs End ======================================
 
   // ======================== Event Listeners Start ======================================
@@ -35,6 +37,11 @@ const Reply = ({ replyData, commentData }) => {
   const handleReplyInputToggle = () => {
     setIsReplyInputOpen(!isReplyInputOpen);
   };
+  useClickOutside(replyContainer, replyBtn, () => {
+    if (isReplyInputOpen) {
+      setIsReplyInputOpen(false);
+    }
+  });
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
     document.body.classList.add("overflow-hidden");
@@ -208,6 +215,7 @@ const Reply = ({ replyData, commentData }) => {
           //  =========== Reply Btn ==========
 
           <button
+            ref={replyBtn}
             onClick={handleReplyInputToggle}
             className="reply-btn md:order-3 md:col-span-5"
           >
@@ -221,7 +229,10 @@ const Reply = ({ replyData, commentData }) => {
       {/* // ======================== User Section Start ====================================== */}
 
       {isReplyInputOpen && (
-        <div className="user-section ml-6 sm:ml-10 md:ml-16">
+        <div
+          ref={replyContainer}
+          className="user-section ml-6 sm:ml-10 md:ml-16"
+        >
           <textarea
             ref={replyInput}
             placeholder="Add a reply"

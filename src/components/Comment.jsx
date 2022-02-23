@@ -3,6 +3,7 @@ import Reply from "./Reply";
 import CommentDeleteModal from "./CommentDeleteModal";
 import { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../App";
+import { useClickOutside } from "../Hooks";
 
 const Comment = ({ commentData }) => {
   // ======================== States Start ======================================
@@ -29,13 +30,23 @@ const Comment = ({ commentData }) => {
   // ======================== Refs Start ======================================
   const replyInput = useRef();
   const content = useRef();
-
+  const replyContainer = useRef();
+  const replyBtn = useRef();
   // ======================== Refs End ======================================
 
   // ======================== Event Listeners Start ======================================
   const handleReplyInputToggle = () => {
-    setIsReplyInputOpen(!isReplyInputOpen);
+    if (!isReplyInputOpen) {
+      setIsReplyInputOpen(true);
+    } else if (isReplyInputOpen) {
+      setIsReplyInputOpen(false);
+    }
   };
+  useClickOutside(replyContainer, replyBtn, () => {
+    if (isReplyInputOpen) {
+      setIsReplyInputOpen(false)
+    }
+  });
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
     document.body.classList.add("overflow-hidden");
@@ -106,9 +117,8 @@ const Comment = ({ commentData }) => {
 
         {/* // ======================== Score Btns Start ====================================== */}
         <div className="score-btns md:row-span-2 md:order-1 md:col-span-1">
-
           {/* // =========== Plus Score Btn ========== */}
-          
+
           <button
             disabled={
               localStorage.getItem(`isScorePlusDisabled${commentData.id}`)
@@ -139,7 +149,7 @@ const Comment = ({ commentData }) => {
           </p>
 
           {/* // =========== Minus Score Btn ========== */}
-          
+
           <button
             disabled={
               localStorage.getItem(`isScoreMinusDisabled${commentData.id}`)
@@ -213,7 +223,8 @@ const Comment = ({ commentData }) => {
         ) : (
           //  =========== Reply Btn ==========
           <button
-            onClick={handleReplyInputToggle}
+            ref={replyBtn}
+            onClick={() => handleReplyInputToggle()}
             className={`reply-btn reply-btn-${commentData.id} md:order-3 md:col-span-5`}
           >
             <img src="./images/icon-reply.svg" alt="" />
@@ -225,7 +236,10 @@ const Comment = ({ commentData }) => {
       {/* // ======================== User Section Start ====================================== */}
       {isReplyInputOpen && (
         <>
-          <div className={`user-section user-section-${commentData.id}`}>
+          <div
+            ref={replyContainer}
+            className={`user-section user-section-${commentData.id}`}
+          >
             <textarea
               ref={replyInput}
               placeholder="Add a reply"
