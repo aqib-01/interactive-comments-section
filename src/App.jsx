@@ -5,7 +5,6 @@ import User from "./components/User";
 import FeedbackModal from "./components/FeedbackModal";
 import Comment from "./components/Comment";
 import { v4 as uuidv4 } from "uuid";
- 
 export const Context = React.createContext();
 // ======================================================================================================================
 
@@ -227,7 +226,7 @@ const App = () => {
       const newComment = {
         id: uuidv4(),
         content: commentInputValue,
-        createdAt: "Just Now",
+        createdAt: Date.now(),
         score: 0,
         user: { ...currentUser },
         replies: [],
@@ -264,7 +263,7 @@ const App = () => {
       const newReply = {
         id: uuidv4(),
         content: replyInputValue,
-        createdAt: "Just Now",
+        createdAt: Date.now(),
         score: 0,
         user: { ...currentUser },
         replyingTo: replyingTo,

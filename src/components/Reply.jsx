@@ -3,6 +3,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import { useClickOutside } from "../Hooks";
 import { Context } from "../App";
 import ReplyDeleteModal from "./ReplyDeleteModal";
+import { getTimeDif } from "../functions";
 const Reply = ({ replyData, commentData }) => {
   // ======================== States Start ======================================
   const [isReplyInputOpen, setIsReplyInputOpen] = useState(false);
@@ -91,7 +92,7 @@ const Reply = ({ replyData, commentData }) => {
             </span>
           )}
           <p className="ml-4 text-sm xs:text-base text-grayish-blue">
-            {replyData.createdAt}
+            {getTimeDif(replyData.createdAt)}
           </p>
         </div>
 

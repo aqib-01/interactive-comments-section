@@ -4,7 +4,7 @@ import CommentDeleteModal from "./CommentDeleteModal";
 import { useContext, useState, useRef, useEffect } from "react";
 import { Context } from "../App";
 import { useClickOutside } from "../Hooks";
-
+import { getTimeDif } from "../functions";
 const Comment = ({ commentData }) => {
   // ======================== States Start ======================================
   const [isReplyInputOpen, setIsReplyInputOpen] = useState(false);
@@ -95,7 +95,7 @@ const Comment = ({ commentData }) => {
           )}
 
           <p className="ml-4 text-sm xs:text-base text-grayish-blue ">
-            {commentData.createdAt}
+            {getTimeDif(commentData.createdAt)}
           </p>
         </div>
         {/* // ======================== Comment Content Start ====================================== */}
