@@ -23,7 +23,7 @@ export let getTimeDif = (orgTime) => {
       result = endNum + " mins ago";
     }
     return result;
-  } else if ((tDif > 3600000 || tDif == 3600000) && tDif < 216000000) {
+  } else if ((tDif > 3600000 || tDif == 3600000) && tDif < 3600000 * 24) {
     let endNum = Math.floor(tDif / 3600000);
 
     let result;
@@ -33,8 +33,11 @@ export let getTimeDif = (orgTime) => {
       result = endNum + " hours ago";
     }
     return result;
-  } else if ((tDif > 216000000 || tDif == 216000000) && tDif < 1512000000) {
-    let endNum = Math.floor(tDif / 216000000);
+  } else if (
+    (tDif > 3600000 * 24 || tDif == 3600000 * 24) &&
+    tDif < 3600000 * 24 * 7
+  ) {
+    let endNum = Math.floor(tDif / (3600000 * 24));
     let result;
     if (endNum <= 1) {
       result = endNum + " day ago";
@@ -42,8 +45,11 @@ export let getTimeDif = (orgTime) => {
       result = endNum + " days ago";
     }
     return result;
-  } else if ((tDif > 1512000000 || tDif == 1512000000) && tDif < 1512000000 * 4) {
-    let endNum = Math.floor(tDif / 1512000000);
+  } else if (
+    (tDif > 3600000 * 24 * 7 || tDif == 3600000 * 24 * 7) &&
+    tDif < 3600000 * 24 * 7 * 4.34524167
+  ) {
+    let endNum = Math.floor(tDif / (3600000 * 24 * 7));
 
     let result;
     if (endNum <= 1) {
@@ -52,8 +58,12 @@ export let getTimeDif = (orgTime) => {
       result = endNum + " weeks ago";
     }
     return result;
-  } else if (tDif > 1512000000 * 4 || tDif == 1512000000 * 4) {
-    let endNum = Math.floor(tDif / (1512000000*4)) ;
+  } else if (
+    (tDif > 3600000 * 24 * 7 * 4.34524167 ||
+      tDif == 3600000 * 24 * 7 * 4.34524167) &&
+    tDif < 3600000 * 24 * 365
+  ) {
+    let endNum = Math.floor(tDif / (3600000 * 24 * 7 * 4.34524167));
 
     let result;
     if (endNum <= 1) {
@@ -62,5 +72,15 @@ export let getTimeDif = (orgTime) => {
       result = endNum + " months ago";
     }
     return result;
-  }
+  } else if (tDif > 3600000 * 24 * 365 || tDif == 3600000 * 24 * 365) {
+    let endNum = Math.floor(tDif / (3600000 * 24 * 365));
+
+    let result;
+    if (endNum <= 1) {
+      result = endNum + " year ago";
+    } else {
+      result = endNum + " years ago";
+    }
+    return result;
+  } 
 };
