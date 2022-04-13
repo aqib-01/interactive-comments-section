@@ -219,7 +219,7 @@ const App = () => {
   // ======================================================================================================================
 
   const handleAddComment = (commentInputValue, currentUser) => {
-    if (!commentInputValue) {
+    if (!commentInputValue || commentInputValue.trim().length === 0) {
       dispatch({ type: "INPUT_ERROR" });
     } else if (commentInputValue) {
       let newComments = [...state.data.comments];
@@ -255,7 +255,7 @@ const App = () => {
     currentUser,
     replyingTo
   ) => {
-    if (!replyInputValue) {
+    if (!replyInputValue || replyInputValue.trim().length === 0) {
       dispatch({ type: "INPUT_ERROR" });
     } else if (replyInputValue) {
       let newComments = state.data.comments;

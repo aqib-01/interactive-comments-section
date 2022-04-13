@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import { Context } from "../App";
 
 const User = () => {
@@ -11,8 +11,6 @@ const User = () => {
       <textarea
         ref={commentInput}
         placeholder="Add a comment"
-        name=""
-        id=""
         className="comment-input md:order-2"
       ></textarea>
       <img className="user-img md:order-1" src={currentUser.image.png} alt="" />
