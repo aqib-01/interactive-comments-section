@@ -261,7 +261,7 @@ const Comment = ({ commentData }) => {
                   commentData.user.username
                 );
 
-                if (replyInput.current.value) {
+                if (replyInput.current.value.trim().length) {
                   setIsReplyInputOpen(false);
                 }
                 replyInput.current.value = "";
